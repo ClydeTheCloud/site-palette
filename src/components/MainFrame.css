@@ -1,0 +1,39 @@
+.main {
+	display: grid;
+	grid-template-columns: 3fr 2fr;
+	grid-template-rows: 1fr auto;
+	grid-template-areas:
+		"text img"
+		"items items";
+	padding-top: 2rem;
+	grid-gap: 2vh;
+}
+
+.main-background-image {
+	grid-area: img;
+	background-image: url(./img/grape.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	/* width: 500px;
+	height: 500px; */
+}
+
+.main-btn {
+	background-color: #222;
+	border: none;
+	border-radius: 15px;
+	padding: 8px 22px;
+	font-size: 1rem;
+	font-weight: 700;
+	color: white;
+}
+
+.main-text h1 {
+	grid-area: text;
+	margin-top: 0;
+}
+
+.wrapper .items {
+	grid-area: items;
+}
