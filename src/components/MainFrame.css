@@ -3,8 +3,8 @@
 	grid-template-columns: 3fr 2fr;
 	grid-template-rows: 1fr auto;
 	grid-template-areas:
-		"text img"
-		"items items";
+		'text img'
+		'items items';
 	padding-top: 2rem;
 	grid-gap: 2vh;
 }
@@ -20,13 +20,20 @@
 }
 
 .main-btn {
-	background-color: #222;
-	border: none;
+	/* background-color: #222; */
 	border-radius: 15px;
 	padding: 8px 22px;
 	font-size: 1rem;
 	font-weight: 700;
 	color: white;
+	transition: 0.5s ease;
+	/* border: 1px solid #222; */
+}
+
+.main-btn:hover {
+	cursor: pointer;
+	/* background-color: white; */
+	/* color: #222; */
 }
 
 .main-text h1 {
@@ -34,6 +41,14 @@
 	margin-top: 0;
 }
 
-.wrapper .items {
+.wrapper-items {
+	margin-top: 3rem;
+	text-align: center;
 	grid-area: items;
+}
+
+.items {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }

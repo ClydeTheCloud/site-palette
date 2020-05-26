@@ -1,6 +1,6 @@
 header {
-	width: 100vw;
-	background-color: #dddddd;
+	width: 100%;
+	/* background-color: #dddddd; */
 	height: 65px;
 }
 
@@ -25,26 +25,29 @@ header .wrapper {
 }
 
 .menu-button {
-	background-color: #999;
+	/* background-color: #999; */
 	border: none;
 	border-radius: 25px;
 	padding: 8px 22px;
 	font-size: 1rem;
-	color: white;
+	/* color: white; */
 	transition: 0.5s ease;
 }
 
 .menu-button:hover {
-	color: black;
+	/* color: black; */
 	cursor: pointer;
-	background-color: #0282fa;
+	/* background-color: #0282fa; */
 }
 
-.menu-item {
+.menu-item,
+a {
 	font-size: 1rem;
 	transition: 0.5s ease;
 	width: 100%;
 	height: 100%;
+	text-decoration: none;
+	/* color: black; */
 }
 
 .menu-link,
@@ -56,7 +59,8 @@ header .wrapper {
 	height: 100%;
 }
 
-.menu-item:hover {
-	color: #0282fa;
+.menu-item:hover,
+a:hover {
+	/* color: #0282fa; */
 	cursor: pointer;
 }

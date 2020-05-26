@@ -1,0 +1,44 @@
+.swatch-edit-wrapper {
+	margin: 5px;
+	width: 160px;
+	height: 55px;
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-areas:
+		'num dis dis dis dis'
+		'num inp inp inp btn';
+	grid-gap: 5px;
+}
+
+.swatch-edit-number {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	grid-area: num;
+}
+
+.swatch-edit-display {
+	grid-area: dis;
+}
+
+.swatch-edit-input {
+	grid-area: inp;
+	border: none;
+}
+
+.swatch-edit-set-btn {
+	grid-area: btn;
+	border: none;
+	border-radius: 5px;
+}
+
+.modal-edit-close-btn {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	color: black;
+	font-size: 20px;
+	line-height: 12px;
+	cursor: pointer;
+}

@@ -1,45 +1,123 @@
 .switcher {
+	z-index: 2;
 	display: flex;
 	flex-direction: row;
 	position: fixed;
 	align-items: center;
-	right: -115px;
+	right: -316px;
 	top: 50%;
 	transform: translateY(-50%);
+	transition: 0.6s ease-in-out;
+	min-width: 2px;
+	min-height: 2px;
 }
 
+.big,
 .small {
-	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	transition: 0.6s ease-in-out;
+	border: 1px solid white;
+}
+
+.small {
+	position: absolute;
+	right: 300px;
+	z-index: 3;
+	cursor: pointer;
 	height: 40px;
 	width: 55px;
-	background-color: #ddd;
+	/* background-color: #ddd; */
 	border-radius: 10px;
 	font-weight: 700;
 	font-size: 20px;
+	border-right: none;
+	border-bottom-right-radius: 2px;
+	border-top-right-radius: 2px;
+}
+
+span {
+	display: block;
+	transition: 0.6s ease-in-out;
+	transform: translateX(-10px);
 }
 
 .small span {
 	width: 20px;
 }
 
+.rotate {
+	transform: rotate(-180deg) translateX(20px);
+}
+
 .big {
-	position: relative;
+	position: absolute;
 	right: 15px;
-	height: 300px;
-	width: 100px;
-	background-color: #ddd;
+	height: 500px;
+	width: 300px;
+	/* background-color: #ddd; */
 	border-top-left-radius: 15px;
 	border-bottom-left-radius: 15px;
 }
 
-.big,
-.small {
-	transition: 0.6s ease-in-out;
+.opened {
+	transform: translateX(-300px);
 }
 
-.opened {
-	transform: translateX(-100px);
+.palette-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.nav-wrapper,
+.controls-wrapper {
+	margin: 16px 0;
+	display: flex;
+	justify-content: space-between;
+	width: 200px;
+}
+
+.nav-btn,
+.controls-btn {
+	width: 80px;
+	border: 1px solid white;
+	border-radius: 15px;
+}
+
+.nav-btn {
+	background-color: black;
+	color: white;
+}
+
+.edit {
+	background-color: red;
+	color: white;
+	align-self: flex-start;
+}
+
+.apply {
+	background-color: green;
+	color: white;
+	align-self: flex-start;
+}
+
+.new {
+	background-color: blue;
+	color: white;
+	align-self: flex-end;
+}
+
+.index {
+	text-align: center;
+	margin: 8px 0;
+}
+
+.nav-wrapper {
+	margin-bottom: 0;
+}
+
+.controls-wrapper {
+	min-height: 56px;
 }

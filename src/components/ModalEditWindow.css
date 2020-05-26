@@ -1,0 +1,45 @@
+.modal {
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-closed {
+	display: none;
+}
+
+.modal-edit {
+	box-sizing: border-box;
+	padding: 10px;
+	z-index: 11;
+	width: 400px;
+	height: 500px;
+	background-color: #bbb;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+	text-align: center;
+	border-radius: 15px;
+}
+
+.modal-edit p {
+	display: inline-block;
+	margin-top: 0;
+}
+
+.modal-edit p + input {
+	margin-left: 10px;
+}
+
+.modal-swatch-wrapper {
+	/* padding: 20px 0; */
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
