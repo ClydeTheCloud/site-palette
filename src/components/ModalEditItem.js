@@ -1,21 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import './ModalEditItem.css';
-import { PalettesContext } from '../PalettesContext';
 
 function ModalEditItem(props) {
-	let context = useContext(PalettesContext);
-
-	const [colorValue, setColorValue] = useState('');
+	const [bg, setBg] = useState(props.bgColor);
+	const [colorValue, setColorValue] = useState(bg);
 	function handleColorChange(event) {
 		setColorValue(event.target.value);
 	}
 
-	const [bg, setBg] = useState(props.bgColor);
-	const [name, setName] = useState(props.colorName);
-
 	function setNewColor() {
 		setBg(colorValue);
-		setName(colorValue);
 		props.set(colorValue, props.index);
 	}
 
@@ -34,10 +28,6 @@ function ModalEditItem(props) {
 		return yiq >= 128 ? 'black' : 'white';
 	}
 
-	useEffect(() => {
-		setColorValue(props.colorName);
-	}, []);
-
 	return (
 		<div className="swatch-edit-wrapper">
 			<div className="swatch-edit-number">{props.index}</div>
@@ -48,7 +38,7 @@ function ModalEditItem(props) {
 					color: getContrast(bg),
 				}}
 			>
-				{name}
+				{bg}
 			</div>
 			<input
 				type="text"

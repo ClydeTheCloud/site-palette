@@ -17,7 +17,7 @@
 	padding: 10px;
 	z-index: 11;
 	width: 400px;
-	height: 500px;
+	min-height: 500px;
 	background-color: #bbb;
 	position: absolute;
 	top: 50%;
@@ -42,4 +42,25 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
+}
+
+.modal-btn-wrapper {
+	display: flex;
+	justify-content: space-around;
+}
+
+.modal-btn {
+	margin: 16px 0;
+	width: 80px;
+	border: 1px solid white;
+	border-radius: 15px;
+	color: white;
+}
+
+.save {
+	background-color: green;
+}
+
+.delete {
+	background-color: red;
 }

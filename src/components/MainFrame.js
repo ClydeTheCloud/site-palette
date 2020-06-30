@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Item from './Item';
 import './MainFrame.css';
-import { PalettesContext } from '../PalettesContext';
-import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { H1, H2, H3, P, BTN_BORDER } from './_styled-components';
 
 function MainFrame() {
-	let context = useContext(PalettesContext);
+	const { activePalette, paletteData } = useSelector(state => state);
 
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -13,8 +13,8 @@ function MainFrame() {
 	function getItems() {
 		fetch(
 			'https://api.unsplash.com/search/photos?query=web&page=1&per_page=6&client_id=TOtBpPWZNPVXNxTI7xvV6A6x5lCl0f59Hj1e0LDUwtk'
-		).then((response) => {
-			response.json().then((com) => {
+		).then(response => {
+			response.json().then(com => {
 				setData(com.results);
 				setIsLoading(false);
 			});
@@ -29,32 +29,57 @@ function MainFrame() {
 		getItems();
 	}, []);
 
-	const H1 = styled.h1`
-		color: ${context[3].palette[context[4].addresses.main.title]};
-	`;
-	const H2 = styled.h2`
-		color: ${context[3].palette[context[4].addresses.main.title]};
-	`;
-	const H3 = styled.h3`
-		color: ${context[3].palette[context[4].addresses.main.subTitle]};
-	`;
-	const P = styled.p`
-		color: ${context[3].palette[context[4].addresses.main.text]};
-	`;
-	const Btn = styled.button`
-		color: ${context[3].palette[context[4].addresses.main.btn]};
-		background-color: ${context[3].palette[context[4].addresses.main.btnBg]};
-		border: 1px solid ${context[3].palette[context[4].addresses.main.btnBorder]};
-		&:hover {
-			color: ${context[3].palette[context[4].addresses.main.btnOffset]};
-			background-color: ${context[3].palette[
-				context[4].addresses.main.btnBgOffset
-			]};
-		}
-	`;
+	H1.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.main.title
+			],
+	};
+	H2.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.main.title
+			],
+	};
+	H3.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.main.subTitle
+			],
+	};
+	P.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.main.text
+			],
+	};
+	BTN_BORDER.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.main.btn
+			],
+		bg:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.main.btnBg
+			],
+		border:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.main.btnBorder
+			],
+		colorHover:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.main.btnOffset
+			],
+		bgHover:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.main.btnBgOffset
+			],
+	};
 
 	document.body.style = `background: ${
-		context[3].palette[context[4].addresses.main.bg]
+		paletteData[activePalette].colors[
+			paletteData[activePalette].addresses.main.bg
+		]
 	}`;
 
 	const loadingMessage = (
@@ -75,7 +100,7 @@ function MainFrame() {
 					I'll wait for you here, don't worry, i'm not going anywhere. Take your
 					time.
 				</P>
-				<Btn className="main-btn">TRY IT OUT NOW</Btn>
+				<BTN_BORDER className="main-btn">TRY IT OUT NOW</BTN_BORDER>
 			</div>
 			<div className="main-background-image"></div>
 			<div className="wrapper wrapper-items">

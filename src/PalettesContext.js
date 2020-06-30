@@ -1,9 +1,5 @@
 import React, { useState, createContext } from 'react';
 
-let storedPalettes_BUFFER;
-let storedColorsAddress_BUFFER;
-let activeName_BUFFER;
-
 const defaultPalettes = [
 	{
 		name: 'Default',
@@ -19,6 +15,52 @@ const defaultPalettes = [
 			'#ffaa00',
 			'',
 		],
+		addresses: {
+			header: {
+				bg: 0,
+				logo: 7,
+				menuItem: 7,
+				menuItemOffset: 4,
+				menuBtn: 2,
+				menuBtnBg: 1,
+				menuBtnOffset: 3,
+				menuBtnBgOffset: 4,
+			},
+			main: {
+				bg: 2,
+				title: 7,
+				subTitle: 7,
+				text: 7,
+				btn: 2,
+				btnBg: 3,
+				btnOffset: 7,
+				btnBgOffset: 2,
+				btnBorder: 7,
+			},
+			items: {
+				bg: 0,
+				name: 3,
+				text: 3,
+				btn: 3,
+				btnBg: 6,
+				btnOffset: 3,
+				btnBgOffset: 4,
+			},
+			footer: {
+				bg: 0,
+				titles: 5,
+				text: 5,
+				link: 3,
+				linkOffset: 4,
+				social: 3,
+				socialOffset: 4,
+				btn: 2,
+				btnBg: 3,
+				btnOffset: 7,
+				btnBgOffset: 2,
+				btnBorder: 7,
+			},
+		},
 	},
 	{
 		name: 'Default2',
@@ -34,6 +76,52 @@ const defaultPalettes = [
 			'#ff0000',
 			'',
 		],
+		addresses: {
+			header: {
+				bg: 0,
+				logo: 7,
+				menuItem: 7,
+				menuItemOffset: 4,
+				menuBtn: 2,
+				menuBtnBg: 1,
+				menuBtnOffset: 3,
+				menuBtnBgOffset: 4,
+			},
+			main: {
+				bg: 2,
+				title: 7,
+				subTitle: 7,
+				text: 7,
+				btn: 2,
+				btnBg: 3,
+				btnOffset: 7,
+				btnBgOffset: 2,
+				btnBorder: 7,
+			},
+			items: {
+				bg: 0,
+				name: 3,
+				text: 3,
+				btn: 3,
+				btnBg: 6,
+				btnOffset: 3,
+				btnBgOffset: 4,
+			},
+			footer: {
+				bg: 0,
+				titles: 5,
+				text: 5,
+				link: 3,
+				linkOffset: 4,
+				social: 3,
+				socialOffset: 4,
+				btn: 2,
+				btnBg: 3,
+				btnOffset: 7,
+				btnBgOffset: 2,
+				btnBorder: 7,
+			},
+		},
 	},
 	{
 		name: 'White',
@@ -49,6 +137,52 @@ const defaultPalettes = [
 			'#888888',
 			'',
 		],
+		addresses: {
+			header: {
+				bg: 0,
+				logo: 7,
+				menuItem: 7,
+				menuItemOffset: 4,
+				menuBtn: 2,
+				menuBtnBg: 1,
+				menuBtnOffset: 3,
+				menuBtnBgOffset: 4,
+			},
+			main: {
+				bg: 2,
+				title: 7,
+				subTitle: 7,
+				text: 7,
+				btn: 2,
+				btnBg: 3,
+				btnOffset: 7,
+				btnBgOffset: 2,
+				btnBorder: 7,
+			},
+			items: {
+				bg: 0,
+				name: 3,
+				text: 3,
+				btn: 3,
+				btnBg: 6,
+				btnOffset: 3,
+				btnBgOffset: 4,
+			},
+			footer: {
+				bg: 0,
+				titles: 5,
+				text: 5,
+				link: 3,
+				linkOffset: 4,
+				social: 3,
+				socialOffset: 4,
+				btn: 2,
+				btnBg: 3,
+				btnOffset: 7,
+				btnBgOffset: 2,
+				btnBorder: 7,
+			},
+		},
 	},
 ];
 
@@ -202,27 +336,7 @@ const defaultColorsAddress = [
 	},
 ];
 
-if (localStorage.getItem('palettes') !== null) {
-	storedPalettes_BUFFER = JSON.parse(localStorage.getItem('palettes'));
-} else {
-	storedPalettes_BUFFER = defaultPalettes;
-}
-
-if (localStorage.getItem('addresses') !== null) {
-	storedColorsAddress_BUFFER = JSON.parse(localStorage.getItem('addresses'));
-} else {
-	storedColorsAddress_BUFFER = defaultColorsAddress;
-}
-
-if (localStorage.getItem('activeName') !== null) {
-	activeName_BUFFER = JSON.parse(localStorage.getItem('activeName'));
-} else {
-	activeName_BUFFER = 'Default';
-}
-
-export const PalettesContext = createContext();
-
-export const PaletteProvider = (props) => {
+/* export const PaletteProvider = (props) => {
 	const [allPalettes, setPalettes] = useState(storedPalettes_BUFFER);
 	const [allAddresses, setAddresses] = useState(storedColorsAddress_BUFFER);
 	const [activePaletteName, setActivePalette] = useState(activeName_BUFFER);
@@ -251,3 +365,4 @@ export const PaletteProvider = (props) => {
 		</PalettesContext.Provider>
 	);
 };
+ */

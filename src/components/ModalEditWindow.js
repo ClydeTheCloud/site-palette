@@ -1,17 +1,15 @@
-import React, { useContext, useState } from 'react';
-import { PalettesContext } from '../PalettesContext';
+import React, { useState, useEffect } from 'react';
 import './ModalEditWindow.css';
 import ModalEditItem from './ModalEditItem';
+import { useDispatch } from 'react-redux';
+import { savePalette, deletePalette } from '../logic/actions';
 
 function ModalEditWindow(props) {
-	let context = useContext(PalettesContext);
+	const dispatch = useDispatch();
+	let { name, colors } = props.edit;
+	console.log(colors);
 
-	const allPalette_BUFFER = context[0];
-	const setPalette = context[6];
-
-	// console.log(context[0][props.edit]);
-
-	const [nameValue, setNameValue] = useState(context[0][props.edit].name);
+	const [nameValue, setNameValue] = useState(props.edit.name);
 	function handleNameChange(event) {
 		setNameValue(event.target.value);
 	}
@@ -19,42 +17,44 @@ function ModalEditWindow(props) {
 	function setNewColor(colorValue, index) {
 		const hexRegExp = /^#[0-9a-f]{6}/i;
 		if (hexRegExp.test(colorValue)) {
-			allPalette_BUFFER[props.edit].palette[index] = colorValue;
+			props.edit.colors[index] = colorValue;
 		} else {
 			console.log('Wrong hex color:', colorValue);
 		}
 	}
 
-	let swatchEditGenerator = context[0][props.edit].palette.map(
-		(item, index) => {
-			let colorName, bgColor;
-			if (context[0][props.edit].palette[index] === '') {
-				bgColor = 'black';
-				colorName = 'EMPTY';
-			} else {
-				colorName = context[0][props.edit].palette[index];
-				bgColor = context[0][props.edit].palette[index];
-			}
+	const swatchEditGenerator = colors.map((item, index) => {
+		return (
+			<ModalEditItem
+				data={item}
+				index={index}
+				key={index}
+				bgColor={colors[index]}
+				set={setNewColor}
+			/>
+		);
+	});
 
-			return (
-				<ModalEditItem
-					editing={props.edit}
-					data={item}
-					index={index}
-					key={index}
-					colorName={colorName}
-					bgColor={bgColor}
-					set={setNewColor}
-				/>
-			);
-		}
-	);
-
-	function savePalette() {
-		allPalette_BUFFER[props.edit].name = nameValue;
-		setPalette(allPalette_BUFFER);
+	function savePaletteHandler() {
+		const addresses = props.edit.addresses;
+		dispatch(
+			savePalette(props.paletteIndex, { name: nameValue, colors, addresses })
+		);
 		props.close();
 	}
+
+	function deletePaletteHandler() {
+		if (!props.isLastPalette()) {
+			dispatch(deletePalette(props.paletteIndex));
+			props.close();
+		} else {
+			alert('This is your last palette');
+		}
+	}
+
+	useEffect(() => {
+		setNameValue(props.edit.name);
+	}, []);
 
 	return (
 		<div className={props.status ? 'modal' : 'modal modal-closed'}>
@@ -62,16 +62,23 @@ function ModalEditWindow(props) {
 				<div className="modal-edit-close-btn" onClick={props.close}>
 					&times;
 				</div>
-				<h2>Palette number {props.edit + 1}</h2>
+				<h2>Palette number {props.paletteIndex + 1}</h2>
 				<p>Name: </p>
 				<input
 					type="text"
-					placeholder={context[0][props.edit].name}
+					placeholder={props.edit.name}
 					value={nameValue}
 					onChange={handleNameChange}
 				/>
 				<div className="modal-swatch-wrapper">{swatchEditGenerator}</div>
-				<button onClick={savePalette}>SAVE</button>
+				<div className="modal-btn-wrapper">
+					<button className="modal-btn delete" onClick={deletePaletteHandler}>
+						Delete
+					</button>
+					<button className="modal-btn save" onClick={savePaletteHandler}>
+						Save
+					</button>
+				</div>
 			</div>
 		</div>
 	);

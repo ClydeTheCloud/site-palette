@@ -1,125 +1,128 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import './Switcher.css';
 import PaletteItem from './PaletteItem';
-import { PalettesContext } from '../PalettesContext';
 import ModalEditWindow from './ModalEditWindow';
+import { DIV, P, BTN } from './_styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { nextPalette, prevPalette, createNewPalette } from '../logic/actions';
 
 function Switcher() {
+	const { activePalette, paletteData } = useSelector(state => state);
+	const dispatch = useDispatch();
+
 	const opened = '>';
 
 	const [isOpen, setIsOpen] = useState(false);
+	const [swatchVisible, setSwatchVisible] = useState(false);
 
 	const positionHandler = () => {
 		setIsOpen(!isOpen);
 	};
 
-	let context = useContext(PalettesContext);
-
-	let renderPalletes = context[0].map((item, index) => {
-		return <PaletteItem data={item} key={index} />;
-	});
-
-	const style = {
-		div: {
-			backgroundColor: context[3].palette[context[4].addresses.items.bg],
-		},
-		p: {
-			color: context[3].palette[context[4].addresses.items.name],
-		},
-		button: {
-			color: context[3].palette[context[4].addresses.items.btn],
-			backgroundColor: context[3].palette[context[4].addresses.items.btnBg],
-		},
+	DIV.defaultProps = {
+		bg:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.bg
+			],
+	};
+	P.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.name
+			],
+	};
+	BTN.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.btn
+			],
+		bg:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.btnBg
+			],
 	};
 
-	// PALETTE NAVIGATION - START OF BLOCK
 	const [isBtnDisabled, setIsBtnDisabled] = useState(false);
-	const [currentlyDisplaying, setCurrentlyDisplaying] = useState(0);
-
-	let numberOfPalettes = renderPalletes.length;
-	if (numberOfPalettes < 2) {
-		setIsBtnDisabled(true);
-	}
-
-	function movePrev() {
-		if (currentlyDisplaying !== 0) {
-			setCurrentlyDisplaying(currentlyDisplaying - 1);
-		} else {
-			setCurrentlyDisplaying(numberOfPalettes - 1);
-		}
-	}
-
-	function moveNext() {
-		if (currentlyDisplaying + 1 !== numberOfPalettes) {
-			setCurrentlyDisplaying(currentlyDisplaying + 1);
-		} else {
-			setCurrentlyDisplaying(0);
-		}
-	}
-
-	function applyNewPalette() {
-		const setActivePalette = context[5];
-		setActivePalette(context[0][currentlyDisplaying].name);
-	}
-	// PALETTE NAVIGATION - END OF BLOCK
-
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 
 	function modalEditHandler() {
 		setModalIsOpen(!modalIsOpen);
+		setSwatchVisible(!swatchVisible);
 	}
+
+	//disable navigation if there's only one palette
+	if (paletteData.length < 2 && !isBtnDisabled) {
+		setIsBtnDisabled(true);
+	} else if (paletteData.length > 2 && isBtnDisabled) {
+		setIsBtnDisabled(false);
+	}
+
+	const isLastPalette = () => {
+		if (paletteData.length > 1) {
+			return false;
+		} else {
+			return true;
+		}
+	};
 
 	return (
 		<div>
 			<div className="switcher">
-				<div
-					style={style.div}
+				<DIV
 					className={isOpen ? 'small opened' : 'small'}
 					onClick={positionHandler}
 				>
 					<span className={isOpen ? '' : 'rotate'}>{opened}</span>
-				</div>
-				<div style={style.div} className={isOpen ? 'big opened' : 'big'}>
+				</DIV>
+				<DIV className={isOpen ? 'big opened' : 'big'}>
 					<div className="palette-wrapper">
 						<div className="nav-wrapper">
-							<button
+							<BTN
 								className="nav-btn"
-								onClick={movePrev}
+								onClick={() => dispatch(prevPalette())}
 								disabled={isBtnDisabled}
-								style={style.button}
 							>
 								Prev
-							</button>
-							<button
+							</BTN>
+							<BTN
 								className="nav-btn"
-								onClick={moveNext}
+								onClick={() => dispatch(nextPalette())}
 								disabled={isBtnDisabled}
-								style={style.button}
 							>
 								Next
-							</button>
+							</BTN>
 						</div>
-						<p className="index" style={style.p}>
-							{currentlyDisplaying + 1} out of {numberOfPalettes}
-						</p>
-						{renderPalletes[currentlyDisplaying]}
+						<P className="index">
+							{activePalette + 1} out of {paletteData.length}
+						</P>
+						<PaletteItem data={paletteData[activePalette]} />
 						<div className="controls-wrapper">
 							<button className="edit controls-btn" onClick={modalEditHandler}>
 								Edit
 							</button>
-							<button className="new controls-btn">New</button>
-							<button className="apply controls-btn" onClick={applyNewPalette}>
-								Apply
+							<button
+								className="new controls-btn"
+								onClick={() => {
+									dispatch(createNewPalette());
+									modalEditHandler();
+								}}
+							>
+								New
 							</button>
 						</div>
 					</div>
-				</div>
+				</DIV>
 			</div>
-			<ModalEditWindow
-				status={modalIsOpen}
-				edit={currentlyDisplaying}
-				close={modalEditHandler}
-			/>
+			{/* every time modal window is opened it will render anew to reset all inputs */}
+			{swatchVisible ? (
+				<ModalEditWindow
+					status={modalIsOpen}
+					paletteIndex={activePalette}
+					edit={paletteData[activePalette]}
+					close={modalEditHandler}
+					isLastPalette={isLastPalette}
+				/>
+			) : null}
 		</div>
 	);
 }

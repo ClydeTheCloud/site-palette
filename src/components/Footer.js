@@ -1,49 +1,72 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './Footer.css';
 import Vk from './img/icons/Vk.js';
 import Facebook from './img/icons/Facebook.js';
 import Instagram from './img/icons/Instagram.js';
 import Youtube from './img/icons/Youtube.js';
 import Twitter from './img/icons/Twitter.js';
-import { PalettesContext } from '../PalettesContext';
-import styled from 'styled-components';
-
-// let iconsColor = '#222222';
-// let iconsColorOffset = '#0282fa';
+import { useSelector } from 'react-redux';
+import { H5, P, LI, BTN_BORDER } from './_styled-components';
 
 function Footer() {
-	let context = useContext(PalettesContext);
+	const { activePalette, paletteData } = useSelector(state => state);
 
 	const style = {
 		footer: {
-			backgroundColor: context[3].palette[context[4].addresses.footer.bg],
+			backgroundColor:
+				paletteData[activePalette].colors[
+					paletteData[activePalette].addresses.footer.bg
+				],
 		},
 	};
 
-	const H5 = styled.h5`
-		color: ${context[3].palette[context[4].addresses.footer.titles]};
-	`;
-	const P = styled.p`
-		color: ${context[3].palette[context[4].addresses.footer.text]};
-	`;
-	const LI = styled.li`
-		color: ${context[3].palette[context[4].addresses.footer.link]};
-		&:hover {
-			color: ${context[3].palette[context[4].addresses.footer.linkOffset]};
-		}
-	`;
-	const BTN = styled.button`
-		color: ${context[3].palette[context[4].addresses.footer.btn]};
-		background-color: ${context[3].palette[context[4].addresses.footer.btnBg]};
-		border: 1px solid
-			${context[3].palette[context[4].addresses.footer.btnBorder]};
-		&:hover {
-			color: ${context[3].palette[context[4].addresses.footer.btnOffset]};
-			background-color: ${context[3].palette[
-				context[4].addresses.footer.btnBgOffset
-			]};
-		}
-	`;
+	H5.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.titles
+			],
+	};
+
+	P.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.text
+			],
+	};
+
+	LI.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.link
+			],
+		colorHover:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.linkOffset
+			],
+	};
+
+	BTN_BORDER.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.btn
+			],
+		bg:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.btnBg
+			],
+		border:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.btnBorder
+			],
+		colorHover:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.btnOffset
+			],
+		bgHover:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.btnBgOffset
+			],
+	};
 
 	return (
 		<div>
@@ -73,7 +96,7 @@ function Footer() {
 						<H5>Call to action: last resort.</H5>
 						<hr />
 						<P>Text text text text text text text text text text text</P>
-						<BTN className="footer-btn">BUTTON!</BTN>
+						<BTN_BORDER className="footer-btn">BUTTON!</BTN_BORDER>
 					</div>
 					<div className="footer-item">
 						<H5>Let's get social!</H5>

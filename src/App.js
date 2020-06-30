@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MainFrame from './components/MainFrame';
 import Switcher from './components/Switcher';
-import { PaletteProvider } from './PalettesContext';
+import { Provider } from 'react-redux';
+import { store } from './logic/store';
+import { Tooltip } from './components/utility/Tooltip';
 
 function App() {
 	return (
-		<PaletteProvider>
+		<Provider store={store}>
+			<Switcher />
 			<div className="app">
-				<Switcher />
 				<Header />
 				<MainFrame />
 				<Footer />
 			</div>
-		</PaletteProvider>
+		</Provider>
 	);
 }
 

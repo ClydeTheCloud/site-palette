@@ -1,31 +1,51 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './Item.css';
-import { PalettesContext } from '../PalettesContext';
-import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { DIV, H3, P, BTN } from './_styled-components';
 
 function Item(props) {
-	let context = useContext(PalettesContext);
+	const { activePalette, paletteData } = useSelector(state => state);
 
-	const DIV = styled.div`
-		background-color: ${context[3].palette[context[4].addresses.items.bg]};
-	`;
-	const H3 = styled.h3`
-		color: ${context[3].palette[context[4].addresses.items.name]};
-	`;
-	const P = styled.p`
-		color: ${context[3].palette[context[4].addresses.items.text]};
-	`;
+	DIV.defaultProps = {
+		bg:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.bg
+			],
+	};
 
-	const BTN = styled.button`
-		color: ${context[3].palette[context[4].addresses.items.btn]};
-		background-color: ${context[3].palette[context[4].addresses.items.btnBg]};
-		&:hover {
-			color: ${context[3].palette[context[4].addresses.items.btnOffset]};
-			background-color: ${context[3].palette[
-				context[4].addresses.items.btnBgOffset
-			]};
-		}
-	`;
+	H3.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.name
+			],
+	};
+
+	P.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.text
+			],
+	};
+
+	BTN.defaultProps = {
+		color:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.btn
+			],
+		bg:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.btnBg
+			],
+
+		colorHover:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.btnOffset
+			],
+		bgHover:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.items.btnBgOffset
+			],
+	};
 
 	return (
 		<DIV className="item">

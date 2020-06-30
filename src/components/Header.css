@@ -41,7 +41,7 @@ header .wrapper {
 }
 
 .menu-item,
-a {
+li {
 	font-size: 1rem;
 	transition: 0.5s ease;
 	width: 100%;
@@ -60,7 +60,7 @@ a {
 }
 
 .menu-item:hover,
-a:hover {
+li:hover {
 	/* color: #0282fa; */
 	cursor: pointer;
 }

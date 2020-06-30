@@ -1,5 +1,5 @@
 .switcher {
-	z-index: 2;
+	z-index: 5;
 	display: flex;
 	flex-direction: row;
 	position: fixed;
@@ -24,7 +24,7 @@
 .small {
 	position: absolute;
 	right: 300px;
-	z-index: 3;
+	z-index: 5;
 	cursor: pointer;
 	height: 40px;
 	width: 55px;
@@ -94,19 +94,13 @@ span {
 .edit {
 	background-color: red;
 	color: white;
-	align-self: flex-start;
-}
-
-.apply {
-	background-color: green;
-	color: white;
-	align-self: flex-start;
+	/* align-self: flex-start; */
 }
 
 .new {
 	background-color: blue;
 	color: white;
-	align-self: flex-end;
+	/* align-self: flex-end; */
 }
 
 .index {
@@ -118,6 +112,6 @@ span {
 	margin-bottom: 0;
 }
 
-.controls-wrapper {
+/* .controls-wrapper {
 	min-height: 56px;
-}
+} */

@@ -1,16 +1,20 @@
-import React, { useContext } from 'react';
-import { PalettesContext } from '../../../PalettesContext';
-import styled from 'styled-components';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { SVG } from '../../_styled-components';
 
 function Facebook() {
-	let context = useContext(PalettesContext);
+	const { activePalette, paletteData } = useSelector(state => state);
 
-	const SVG = styled.svg`
-		fill: ${context[3].palette[context[4].addresses.footer.social]};
-		&:hover {
-			fill: ${context[3].palette[context[4].addresses.footer.socialOffset]};
-		}
-	`;
+	SVG.defaultProps = {
+		fill:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.social
+			],
+		fillHover:
+			paletteData[activePalette].colors[
+				paletteData[activePalette].addresses.footer.socialOffset
+			],
+	};
 
 	return (
 		<SVG

@@ -1,13 +1,8 @@
 import React from 'react';
 import './PaletteItem.css';
-// import { PalettesContext } from '../PalettesContext';
 
 function PaletteItem(props) {
-	// let context = useContext(PalettesContext);
-
 	let paletteName = props.data.name;
-
-	// console.log(props.data);
 
 	function getContrast(hexcolor) {
 		hexcolor = hexcolor.slice(1);
@@ -27,16 +22,16 @@ function PaletteItem(props) {
 	function swatchGenerator() {
 		const swatches = [];
 
-		for (const color in props.data.palette) {
-			let contrastColor = getContrast(props.data.palette[color]);
+		for (const color in props.data.colors) {
+			let contrastColor = getContrast(props.data.colors[color]);
 			let colorName, bgColor;
-			if (props.data.palette[color] === '') {
+			if (props.data.colors[color] === '') {
 				contrastColor = 'white';
 				bgColor = 'black';
 				colorName = 'EMPTY';
 			} else {
-				colorName = props.data.palette[color];
-				bgColor = props.data.palette[color];
+				colorName = props.data.colors[color];
+				bgColor = props.data.colors[color];
 			}
 			swatches.push(
 				<div
