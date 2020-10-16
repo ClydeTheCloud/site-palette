@@ -1,0 +1,40 @@
+@import url(./Animations.css);
+
+.tooltip-default-style {
+	padding: 15px;
+	background-color: #333;
+	color: white;
+	border-radius: 5px;
+}
+
+/* body {
+	--tooltip-arrow-size: 10px;
+	--tooltip-arrow-offset: calc(var(--tooltip-arrow-size) / 2);
+} */
+
+/* --------------------------------------------- */
+/* TODO remove this from CSS, implement using JS */
+.tooltip-arrow-wrapper,
+.tooltip-arrow-inner {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	z-index: -1;
+}
+
+.tooltip-arrow-inner {
+	transform: rotate(45deg);
+	background: #333;
+}
+
+/* TODO remove this from CSS, implement using JS */
+/* --------------------------------------------- */
+
+/* .tooltip-arrow {
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	border-color: red;
+	border-style: solid;
+	zIndex: this.props.index - 1,
+} */

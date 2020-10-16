@@ -1,0 +1,47 @@
+.toggle-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.toggle-wrapper:last-child {
+	margin-bottom: 0;
+}
+
+.toggle-wrapper > p {
+	margin: 0 0 5px 0;
+	font-size: 15px;
+	text-align: center;
+	line-height: 15px;
+}
+
+.toggle-wrapper > .swatch {
+	width: 100px;
+	margin: 0 0 5px 0;
+	text-align: center;
+	padding: 4px;
+	border-radius: 5px;
+}
+
+.toggle-navigation {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100px;
+}
+
+.toggle-navigation > button {
+	background-color: #fff;
+	border: none;
+}
+
+.toggle-navigation > button:first-of-type {
+	border-radius: 10px 0 0 10px;
+}
+.toggle-navigation > button:last-of-type {
+	border-radius: 0 10px 10px 0;
+}
+
+.toggle-navigation > div {
+}

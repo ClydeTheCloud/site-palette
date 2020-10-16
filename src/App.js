@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import MainFrame from './components/MainFrame';
-import Switcher from './components/Switcher';
-import { Provider } from 'react-redux';
-import { store } from './logic/store';
-import { Tooltip } from './components/utility/Tooltip';
+import React from 'react'
+import './App.css'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import MainFrame from './components/MainFrame'
+import Switcher from './components/Switcher'
+import { Provider } from 'react-redux'
+import { store } from './logic/store'
 
 function App() {
 	return (
@@ -18,7 +17,7 @@ function App() {
 				<Footer />
 			</div>
 		</Provider>
-	);
+	)
 }
 
-export default App;
+export default App
