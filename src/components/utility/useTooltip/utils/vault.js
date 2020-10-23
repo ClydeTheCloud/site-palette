@@ -1,13 +1,13 @@
 let vaultCounter = 0
 const vault = {}
 
-function vaultCheck(item) {
-	const entry = Object.entries(vault).find(v => v[1] === item)
+function vaultCheck(id) {
+	const entry = Object.entries(vault).find(v => v[1] === id)
 	if (!entry) {
-		const currentId = vaultCounter
+		const currentCounter = vaultCounter
 		vaultCounter = vaultCounter + 1
-		vault[currentId] = item
-		return currentId
+		vault[currentCounter] = id
+		return currentCounter
 	}
 	return parseInt(entry[0])
 }

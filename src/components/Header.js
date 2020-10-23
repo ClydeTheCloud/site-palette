@@ -56,22 +56,42 @@ function Header() {
 					<Logo handler={handler} dataTooltipContentId="logo" />
 					<div className="menu-wrapper">
 						<div className="menu-item">
-							<LI className="menu-link" onClick={handler} data-tooltip-content-id="menuItem">
+							<LI
+								className="menu-link"
+								onClick={handler}
+								data-tooltip-config="group:menu bottom pop3"
+								data-tooltip-content-id="menuItem"
+							>
 								Item 1
 							</LI>
 						</div>
 						<div className="menu-item">
-							<LI className="menu-link" onClick={handler} data-tooltip-content-id="menuItem">
+							<LI
+								className="menu-link"
+								onClick={handler}
+								data-tooltip-config="group:menu bottom pop3"
+								data-tooltip-content-id="menuItem"
+							>
 								Item 2
 							</LI>
 						</div>
 						<div className="menu-item">
-							<LI className="menu-link" onClick={handler} data-tooltip-content-id="menuItem">
+							<LI
+								className="menu-link"
+								onClick={handler}
+								data-tooltip-config="group:menu bottom pop3"
+								data-tooltip-content-id="menuItem"
+							>
 								Item 3
 							</LI>
 						</div>
 						<div className="menu-item">
-							<LI className="menu-link" onClick={handler} data-tooltip-content-id="menuItem">
+							<LI
+								className="menu-link"
+								onClick={handler}
+								data-tooltip-config="group:menu bottom pop3"
+								data-tooltip-content-id="menuItem"
+							>
 								Item 4
 							</LI>
 						</div>

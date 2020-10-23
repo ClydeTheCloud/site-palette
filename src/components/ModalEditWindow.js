@@ -44,7 +44,7 @@ function ModalEditWindow(props) {
 
 	useEffect(() => {
 		setNameValue(props.edit.name)
-	}, [])
+	}, []) // eslint-disable-line
 
 	return (
 		<div className={props.status ? 'modal' : 'modal modal-closed'}>

@@ -8,10 +8,10 @@ class Tooltip extends React.Component {
 	constructor(props) {
 		super(props)
 		this.tooltipRef = React.createRef()
-		this.wrapperId = `ttid-${this.props.parentId}`
-		this.bodyId = `ttid-${this.props.parentId}-body`
-		this.arrowId = `ttid-${this.props.parentId}-arrow`
-		this.arrowWrapperId = `ttid-${this.props.parentId}-arrow-wrapper`
+		this.wrapperId = `ttid-${this.props.identifier}`
+		this.bodyId = `ttid-${this.props.identifier}-body`
+		this.arrowId = `ttid-${this.props.identifier}-arrow`
+		this.arrowWrapperId = `ttid-${this.props.identifier}-arrow-wrapper`
 	}
 
 	setArrow() {
@@ -85,7 +85,7 @@ class Tooltip extends React.Component {
 		let fixedOrAbsolute = this.props.flip === 'fixed:on' ? 'fixed' : 'absolute'
 		const clipPath = this.props.clipPath || this.props.commonClipPath
 
-		createPopper(this.props.id, this.tooltipRef.current, {
+		createPopper(this.props.anchor, this.tooltipRef.current, {
 			placement: this.props.position,
 			modifiers: [
 				{ name: 'arrow', options: { padding: paddingOffset } },
@@ -97,7 +97,9 @@ class Tooltip extends React.Component {
 
 		if (this.props.customClass) {
 			const bg = window.getComputedStyle(body, null).backgroundColor
+			const border = window.getComputedStyle(body, null).borderColor
 			document.getElementById(this.arrowId).style.backgroundColor = bg
+			document.getElementById(this.arrowId).style.borderColor = border
 		}
 
 		if (this.props.arrow) {
@@ -113,7 +115,7 @@ class Tooltip extends React.Component {
 						id={this.bodyId}
 						style={this.styles.tooltipBody}
 						className={`${this.props.customClass || 'tooltip-default-style'} `}
-						key={this.props.parentId}
+						key={this.props.identifier}
 					>
 						<div style={this.styles.tooltipContent}>
 							{this.props.child || this.props.tooltipTextContent}

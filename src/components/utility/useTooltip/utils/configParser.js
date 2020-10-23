@@ -4,13 +4,13 @@ const possibleValues = [
 		position:
 			'auto auto-start auto-end top top-start top-end bottom bottom-start bottom-end right right-start right-end left left-start left-end',
 	},
-	{ nested: 'nested' },
 	{ animation: 'fade slide pop scale' },
 	{ class: 'class:' },
 	{ arrow: 'arrow:sm arrow:md arrow:lg arrow:rd arrow:none' },
 	{ flip: 'flip:off flip:on' },
 	{ fixed: 'fixed:off fixed:on' },
 	{ delay: 'delay' },
+	{ group: 'group:' },
 ]
 
 function configParser(configString, eventType) {
@@ -24,7 +24,7 @@ function configParser(configString, eventType) {
 		throw new Error(
 			`Requirements for a minimal setup are not met. Make sure to provide position in your config-string: ${configString}`
 		)
-	} else if ((eventType === 'click' && finalConfig.methodLength) || finalConfig.positionLength || finalConfig.nestedLength) {
+	} else if ((eventType === 'click' && finalConfig.methodLength) || finalConfig.positionLength) {
 		console.warn(`Unnecessary length was provided in config-string "${configString}"`)
 	}
 
@@ -40,9 +40,8 @@ function extractValuefromString(str, reverse = false) {
 	}
 }
 
-function classExtractor(classString) {
-	const className = classString.substr(6)
-	return className
+function classAndGroupExtractor(classOrGroupString) {
+	return classOrGroupString.substr(6)
 }
 
 function delayExctractor(delayString) {
@@ -81,7 +80,10 @@ function check(array) {
 					}
 					valuesConverted.push(a)
 				} else if (bKey === 'class') {
-					values = { ...values, class: classExtractor(a) }
+					values = { ...values, class: classAndGroupExtractor(a) }
+					valuesConverted.push(a)
+				} else if (bKey === 'group') {
+					values = { ...values, group: classAndGroupExtractor(a) }
 					valuesConverted.push(a)
 				} else if (bKey === 'delay') {
 					values = { ...values, delay: delayExctractor(a) }

@@ -5,6 +5,7 @@
 	background-color: #333;
 	color: white;
 	border-radius: 5px;
+	border: 1px solid white;
 }
 
 /* body {
@@ -19,12 +20,13 @@
 	position: absolute;
 	width: 10px;
 	height: 10px;
-	z-index: -1;
+	z-index: 5;
 }
 
 .tooltip-arrow-inner {
 	transform: rotate(45deg);
 	background: #333;
+	border: 1px solid white;
 }
 
 /* TODO remove this from CSS, implement using JS */

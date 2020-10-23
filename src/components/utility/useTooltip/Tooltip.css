@@ -87,3 +87,24 @@
 .tooltip-helper-class[data-popper-placement^='right'] .tooltip-arrow-wrapper-rd {
 	left: -6px;
 }
+
+/* fix for arrowborders */
+.tooltip-helper-class[data-popper-placement^='top'] .tooltip-arrow-inner {
+	border-left: none;
+	border-top: none;
+}
+
+.tooltip-helper-class[data-popper-placement^='bottom'] .tooltip-arrow-inner {
+	border-right: none;
+	border-bottom: none;
+}
+
+.tooltip-helper-class[data-popper-placement^='left'] .tooltip-arrow-inner {
+	border-left: none;
+	border-bottom: none;
+}
+
+.tooltip-helper-class[data-popper-placement^='right'] .tooltip-arrow-inner {
+	border-right: none;
+	border-top: none;
+}
