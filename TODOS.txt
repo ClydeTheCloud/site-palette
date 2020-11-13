@@ -1,2 +1,0 @@
-TODO handler and tooltips should be moved to upper layer of site
-TODO add 'close-all' button fixed in corner

@@ -1,0 +1,31 @@
+.modal-3 {
+	z-index: 100;
+}
+
+.modal-error-window {
+	box-sizing: border-box;
+	padding: 15px;
+	z-index: 100;
+	min-width: 350px;
+	background-color: #bbb;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+	text-align: center;
+	border-radius: 15px;
+}
+
+.modal-error {
+	color: red;
+}
+
+.modal-error-btn {
+	margin: 16px 0;
+	width: 80px;
+	border: 1px solid white;
+	border-radius: 15px;
+	color: white;
+	background-color: green;
+}

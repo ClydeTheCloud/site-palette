@@ -1,4 +1,4 @@
-import { CREATE_NEW_PALETTE, DELETE_PALETTE, NEXT_PALETTE, PREV_PALETTE, SAVE_PALETTE, NEXT_COLOR, PREV_COLOR } from './actions'
+import { CREATE_NEW_PALETTE, DELETE_PALETTE, NEXT_PALETTE, PREV_PALETTE, SAVE_PALETTE, NEXT_COLOR, PREV_COLOR, INIT } from './actions'
 import { initialState, paletteTemplate } from './initialState.js'
 
 export const palettes = (state = initialState, action) => {
@@ -66,6 +66,9 @@ export const palettes = (state = initialState, action) => {
 				paletteData[activePalette].addresses[action.data.section][action.data.address] = 9
 				return { activePalette, paletteData }
 			}
+		case INIT:
+			let storedState = JSON.parse(localStorage.getItem('palette'))
+			return storedState || initialState
 		default:
 			return state
 	}

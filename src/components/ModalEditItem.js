@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 import './ModalEditItem.css'
 import getContrast from './utility/getContrast'
 
@@ -8,6 +9,11 @@ function ModalEditItem(props) {
 	function handleColorChange(event) {
 		setColorValue(event.target.value)
 	}
+
+	useEffect(() => {
+		setBg(props.bgColor)
+		setColorValue(props.bgColor)
+	}, [props.bgColor])
 
 	function setNewColor() {
 		setBg(colorValue)

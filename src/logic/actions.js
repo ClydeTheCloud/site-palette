@@ -36,3 +36,8 @@ export const prevColor = (section, address) => ({
 	type: PREV_COLOR,
 	data: { section, address },
 })
+
+export const INIT = 'INIT'
+export const init = () => ({
+	type: INIT,
+})

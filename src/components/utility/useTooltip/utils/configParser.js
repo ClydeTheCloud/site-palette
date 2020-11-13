@@ -4,13 +4,14 @@ const possibleValues = [
 		position:
 			'auto auto-start auto-end top top-start top-end bottom bottom-start bottom-end right right-start right-end left left-start left-end',
 	},
-	{ animation: 'fade slide pop scale' },
+	{ animation: 'fade slide pop scale static' },
 	{ class: 'class:' },
 	{ arrow: 'arrow:sm arrow:md arrow:lg arrow:rd arrow:none' },
 	{ flip: 'flip:off flip:on' },
 	{ fixed: 'fixed:off fixed:on' },
 	{ delay: 'delay' },
 	{ group: 'group:' },
+	{ magnet: 'magnet:on magnet:off' },
 ]
 
 function configParser(configString, eventType) {
@@ -72,13 +73,19 @@ function check(array) {
 				}
 				// ...and add found prop-types and prop-values to value array (if there's number at the end, split it into two different props (e.g. animation & animationLength  ))
 				if (bKey === 'animation') {
-					values = {
-						...values,
-						animation: [extractValuefromString(a, true), extractValuefromString(a)],
-						// [bKey]: extractValuefromString(a, true),
-						// [`${bKey}Length`]: extractValuefromString(a),
+					if (a === 'static') {
+						values = {
+							...values,
+							animation: ['', ''],
+						}
+						valuesConverted.push(a)
+					} else {
+						values = {
+							...values,
+							animation: [extractValuefromString(a, true), extractValuefromString(a)],
+						}
+						valuesConverted.push(a)
 					}
-					valuesConverted.push(a)
 				} else if (bKey === 'class') {
 					values = { ...values, class: classAndGroupExtractor(a) }
 					valuesConverted.push(a)
@@ -88,6 +95,10 @@ function check(array) {
 				} else if (bKey === 'delay') {
 					values = { ...values, delay: delayExctractor(a) }
 					valuesConverted.push(a)
+				} else if (bKey === 'flip' || bKey === 'fixed' || bKey === 'magnet') {
+					const aVal = a.endsWith(':on') ? true : false
+					values = { ...values, [bKey]: aVal }
+					valuesConverted.push(a)
 				} else {
 					values = { ...values, [bKey]: a }
 					valuesConverted.push(a)
@@ -95,7 +106,6 @@ function check(array) {
 			}
 		})
 	})
-	// console.log(valuesConverted)
 
 	const checkForUnknowns = array.map(v => [v, valuesConverted.some(vConverted => v === vConverted)])
 	checkForUnknowns.forEach(e => {
@@ -103,7 +113,6 @@ function check(array) {
 			throw new Error(`Unknown config value: ${e[0]}`)
 		}
 	})
-	// console.log(checkForUnknowns)
 
 	return values
 }

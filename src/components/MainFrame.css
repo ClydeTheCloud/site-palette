@@ -9,6 +9,11 @@
 	grid-gap: 2vh;
 }
 
+.body-click-catch {
+	width: 100%;
+	height: 100%;
+}
+
 .main-background-image {
 	grid-area: img;
 	background-image: url(./img/grape.jpg);

@@ -64,3 +64,7 @@
 .delete {
 	background-color: red;
 }
+
+.import {
+	background-color: blue;
+}

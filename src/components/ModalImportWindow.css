@@ -1,0 +1,45 @@
+.modal-2 {
+	z-index: 12;
+}
+
+.import-textarea {
+	width: 90%;
+	min-height: 64px;
+	resize: none;
+	/* margin-top: 16px; */
+}
+
+.modal-import {
+	box-sizing: border-box;
+	padding: 15px;
+	z-index: 13;
+	min-width: 350px;
+	background-color: #bbb;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+	text-align: center;
+	border-radius: 15px;
+}
+
+.type-btn {
+	margin: 16px 0;
+	width: 80px;
+	border: 1px solid white;
+	border-radius: 15px;
+	color: white;
+	background-color: #333;
+}
+
+.type-btn:hover {
+	background-color: #333366;
+}
+
+.type-btn-active {
+	background-color: blue;
+}
+.type-btn-active:hover {
+	background-color: blue;
+}

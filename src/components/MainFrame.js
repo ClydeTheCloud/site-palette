@@ -24,7 +24,19 @@ function MainFrame() {
 				</div>
 			),
 			body: <ColorToggle section="main" address="bg" description="Body background" />,
+			itemBg: <ColorToggle section="items" address="bg" description="Item's background" />,
+			itemName: <ColorToggle section="items" address="name" description="Item's name" />,
+			itemText: <ColorToggle section="items" address="text" description="Item's text" />,
+			itemButton: (
+				<div>
+					<ColorToggle section="items" address="btn" description="Button text" />
+					<ColorToggle section="items" address="btnBg" description="Button background" />
+					<ColorToggle section="items" address="btnOffset" description="Button text on hover" />
+					<ColorToggle section="items" address="btnBgOffset" description="Button background on hover" />
+				</div>
+			),
 		},
+		// globalOptions: { single: true },
 	})
 
 	const [data, setData] = useState([])
@@ -42,7 +54,7 @@ function MainFrame() {
 	}
 
 	let items = data.map((item, index) => {
-		return <Item data={item} key={index} />
+		return <Item data={item} key={index} handler={handler} />
 	})
 
 	useEffect(() => {
@@ -74,8 +86,8 @@ function MainFrame() {
 	const loadingMessage = <H2 className="loading-item">Loading, please wait...</H2>
 
 	return (
-		<>
-			<div className="wrapper main" onClick={handler} data-tooltip-content-id="body" data-tooltip-config="auto pop3">
+		<div className="body-click-catch" onClick={handler} data-tooltip-content-id="body" data-tooltip-config="auto pop3 magnet:on">
+			<div className="wrapper main">
 				<div className="main-text">
 					<H1 onClick={handler} data-tooltip-content-id="title" data-tooltip-config="bottom pop3">
 						Some title text go here.
@@ -105,7 +117,7 @@ function MainFrame() {
 				</div>
 			</div>
 			{tooltips}
-		</>
+		</div>
 	)
 }
 

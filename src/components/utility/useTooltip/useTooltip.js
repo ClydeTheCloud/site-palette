@@ -7,40 +7,30 @@ import vaultCheck from './utils/vault'
 
 // Object for storing timeOut-IDs of different Tooltips, both for close-animation and rendering
 const timeoutIds = { closedelay: {}, animation: {}, hover: {} }
-const configs = {}
+// const configs = {}
+const globalStorage = []
+const outerGlobalOptions = {}
 
-function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipPaths = {}, commonClipPath }) {
+function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipPaths = {}, commonClipPath, globalOptions }) {
 	const [tooltips, setTooltips] = useState({})
+	if (!outerGlobalOptions.single && globalOptions.single) {
+		outerGlobalOptions.single = globalOptions.single
+	}
 
-	// useRef is used for access to current version of state inside timers.
+	// useRef is used to access current version of state inside timers.
 	const tooltipsRef = useRef(tooltips)
 	tooltipsRef.current = tooltips
 
-	// function closeOnEmptyClick() {
-	// 	document.body.addEventListener('click', emptyClickHandler)
-	// }
-
 	// Main function - universal event handler
 	const tooltipEventHandler = event => {
-		// Prevent default is used to determine if event had already fired on any other element
-		if (event.defaultPrevented) {
+		// nativeEvent.fired is used to determine if event had already fired on any other element
+		if (event.nativeEvent.fired) {
 			console.log('prevented!')
 			return
 		} else {
-			event.preventDefault()
+			event.nativeEvent.fired = true
 		}
 
-		// const isTargetCompatible = Boolean(
-		// 	event.target.dataset.tooltipConfig || event.target.dataset.tooltipContent || event.target.dataset.tooltipContentId
-		// )
-
-		// console.log('T', event.target)
-		// console.log('CT', event.currentTarget)
-
-		// if (isTargetCompatible && event.target !== event.currentTarget) {
-		// 	console.log('break')
-		// 	return
-		// }
 		const targetElement = event.currentTarget
 
 		const data = {
@@ -49,10 +39,7 @@ function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipP
 			contentId: targetElement.dataset.tooltipContentId,
 		}
 
-		// console.log('fire')
-		// event.hasFired = true
-
-		// console.log(data)
+		// REWRITE{
 
 		// Get value of tooltipConfig attribute and parse it
 		let config
@@ -65,12 +52,12 @@ function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipP
 			console.error(e)
 		}
 
+		// }REWRITE
+
 		// Get unique ID based on config or target element
 		const identifier = vaultCheck(config.group || targetElement)
 
-		console.log(identifier)
-
-		configs[identifier] = config
+		// configs[identifier] = config
 
 		if (tooltips[identifier] && event.type === 'mouseenter') {
 			const tooltip = document.getElementById(`ttid-${identifier}`)
@@ -85,7 +72,7 @@ function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipP
 			// Check if tooltip associated with targeted element is on the list of active tooltips
 			if (Object.entries(tooltips).some(t => parseInt(t[0]) === identifier)) {
 				// If it is, remove this target and respective Tooltip.
-				close(identifier, config)
+				close(identifier, config, targetElement)
 				return
 			}
 		}
@@ -100,11 +87,11 @@ function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipP
 		}
 
 		if (event.type === 'mouseleave' && !config.delay) {
-			close(targetElement, config, identifier)
+			close(identifier, config, targetElement)
 			return
 		} else if (event.type === 'mouseleave' && config.delay && config.delay[1]) {
 			timeoutIds.closedelay[identifier] = setTimeout(() => {
-				close(identifier, config)
+				close(identifier, config, targetElement)
 			}, config.delay[1] * 500)
 			return
 		}
@@ -112,10 +99,11 @@ function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipP
 		const targetIndex = event.target.style.zIndex
 		const tooltipIndex = targetIndex ? parseInt(targetIndex) + 2 : 3
 
-		// console.log(targetIndex)
-		// console.log(tooltipIndex)
-		// console.log(config)
-		// console.log(clipPaths)
+		if (outerGlobalOptions && outerGlobalOptions.single) {
+			closeAll(true)
+		}
+
+		console.log(config)
 
 		// Generate new Tooltip.
 		const tooltip = (
@@ -134,12 +122,11 @@ function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipP
 				customClass={config.class}
 				arrow={config.arrow}
 				flip={config.flip}
-				clickMagnet={config.clickMagnet}
+				magnet={config.magnet}
 				magnetCoordinates={{ x: event.clientX, y: event.clientY }}
 			/>
 		)
 
-		// Set timeout to adding new Tooltip to state if method in config have length...
 		if (config.delay && event.type === 'mouseenter') {
 			timeoutIds.hover[identifier] = setTimeout(() => {
 				setTooltips({
@@ -147,13 +134,14 @@ function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipP
 					[identifier]: tooltip,
 				})
 			}, config.delay[0] * 500)
-			//... or Add new Tooltip right away.
 		} else {
 			setTooltips({
 				...tooltipsRef.current,
 				[identifier]: tooltip,
 			})
 		}
+
+		globalStorage.push(tooltip)
 	}
 
 	// Array of all rendered Tooltips.
@@ -163,7 +151,7 @@ function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipP
 	////////////////////////////////////////////////////////////////////////////////////// tragetElement and filtering when closing
 
 	// Function for closing Tooltips
-	function close(identifier, config) {
+	function close(identifier, config, anchor) {
 		const tooltip = document.getElementById(`ttid-${identifier}`)
 		if (config && config.animation[0] && tooltip) {
 			tooltip.style.animationName = config.animation[0].concat('-close')
@@ -172,17 +160,24 @@ function useTooltip({ children, defaultConfigString = 'top delay1-3 pop3', clipP
 					setTooltips(
 						Object.fromEntries(Object.entries(tooltipsRef.current).filter(t => t[1].props.identifier !== identifier))
 					)
-					configs[identifier] = null
+					// configs[identifier] = null
 				},
 				config.animation[1] ? config.animation[1] * 100 : 200
 			)
+			globalStorage.filter(tt => tt.props.anchor !== anchor)
 			return
 		}
 		setTooltips(Object.fromEntries(Object.entries(tooltipsRef.current).filter(t => t[1].props.identifier !== identifier)))
-		configs[identifier] = null
+		// configs[identifier] = null
 	}
 
-	return [allTooltips, tooltipEventHandler]
+	function closeAll(global) {
+		;(global ? globalStorage : allTooltips).forEach(tt => {
+			close(tt.props.identifier, { animation: [tt.props.animation, tt.props.animationLength] })
+		})
+	}
+
+	return [allTooltips, tooltipEventHandler, closeAll]
 }
 
 export default useTooltip

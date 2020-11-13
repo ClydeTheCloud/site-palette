@@ -28,6 +28,7 @@ function Header() {
 				</div>
 			),
 		},
+		globalOptions: { single: true },
 	})
 
 	LI.defaultProps = {

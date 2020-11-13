@@ -1,94 +1,81 @@
-import React, { useState } from 'react';
-import './Switcher.css';
-import PaletteItem from './PaletteItem';
-import ModalEditWindow from './ModalEditWindow';
-import { DIV, P, BTN } from './_styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { nextPalette, prevPalette, createNewPalette } from '../logic/actions';
+import React, { useState } from 'react'
+import './Switcher.css'
+import PaletteItem from './PaletteItem'
+import ModalEditWindow from './ModalEditWindow'
+import { DIV, P, BTN } from './_styled-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { nextPalette, prevPalette, createNewPalette } from '../logic/actions'
 
 function Switcher() {
-	const { activePalette, paletteData } = useSelector(state => state);
-	const dispatch = useDispatch();
+	const { activePalette, paletteData } = useSelector(state => state)
+	const dispatch = useDispatch()
 
-	const opened = '>';
+	const opened = '>'
 
-	const [isOpen, setIsOpen] = useState(false);
-	const [swatchVisible, setSwatchVisible] = useState(false);
+	const [isOpen, setIsOpen] = useState(false)
+	const [swatchVisible, setSwatchVisible] = useState(false)
 
 	const positionHandler = () => {
-		setIsOpen(!isOpen);
-	};
+		setIsOpen(!isOpen)
+	}
 
+	// DIV.defaultProps = {
+	// 	bg: paletteData[activePalette].colors[paletteData[activePalette].addresses.items.bg],
+	// }
+	// P.defaultProps = {
+	// 	color: paletteData[activePalette].colors[paletteData[activePalette].addresses.items.name],
+	// }
+	// BTN.defaultProps = {
+	// 	color: paletteData[activePalette].colors[paletteData[activePalette].addresses.items.btn],
+	// 	bg: paletteData[activePalette].colors[paletteData[activePalette].addresses.items.btnBg],
+	// }
 	DIV.defaultProps = {
-		bg:
-			paletteData[activePalette].colors[
-				paletteData[activePalette].addresses.items.bg
-			],
-	};
+		bg: '#333',
+	}
 	P.defaultProps = {
-		color:
-			paletteData[activePalette].colors[
-				paletteData[activePalette].addresses.items.name
-			],
-	};
+		color: 'white',
+	}
 	BTN.defaultProps = {
-		color:
-			paletteData[activePalette].colors[
-				paletteData[activePalette].addresses.items.btn
-			],
-		bg:
-			paletteData[activePalette].colors[
-				paletteData[activePalette].addresses.items.btnBg
-			],
-	};
+		color: 'white',
+		bg: '#333',
+	}
 
-	const [isBtnDisabled, setIsBtnDisabled] = useState(false);
-	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [isBtnDisabled, setIsBtnDisabled] = useState(false)
+	const [modalIsOpen, setModalIsOpen] = useState(false)
 
 	function modalEditHandler() {
-		setModalIsOpen(!modalIsOpen);
-		setSwatchVisible(!swatchVisible);
+		setModalIsOpen(!modalIsOpen)
+		setSwatchVisible(!swatchVisible)
 	}
 
 	//disable navigation if there's only one palette
 	if (paletteData.length < 2 && !isBtnDisabled) {
-		setIsBtnDisabled(true);
+		setIsBtnDisabled(true)
 	} else if (paletteData.length > 2 && isBtnDisabled) {
-		setIsBtnDisabled(false);
+		setIsBtnDisabled(false)
 	}
 
 	const isLastPalette = () => {
 		if (paletteData.length > 1) {
-			return false;
+			return false
 		} else {
-			return true;
+			return true
 		}
-	};
+	}
 
 	return (
 		<div>
 			<div className="switcher">
-				<DIV
-					className={isOpen ? 'small opened' : 'small'}
-					onClick={positionHandler}
-				>
+				<DIV className={isOpen ? 'small opened' : 'small'} onClick={positionHandler}>
 					<span className={isOpen ? '' : 'rotate'}>{opened}</span>
 				</DIV>
 				<DIV className={isOpen ? 'big opened' : 'big'}>
 					<div className="palette-wrapper">
 						<div className="nav-wrapper">
-							<BTN
-								className="nav-btn"
-								onClick={() => dispatch(prevPalette())}
-								disabled={isBtnDisabled}
-							>
+							<BTN className="nav-btn" onClick={() => dispatch(prevPalette())} disabled={isBtnDisabled}>
 								Prev
 							</BTN>
-							<BTN
-								className="nav-btn"
-								onClick={() => dispatch(nextPalette())}
-								disabled={isBtnDisabled}
-							>
+							<BTN className="nav-btn" onClick={() => dispatch(nextPalette())} disabled={isBtnDisabled}>
 								Next
 							</BTN>
 						</div>
@@ -103,8 +90,8 @@ function Switcher() {
 							<button
 								className="new controls-btn"
 								onClick={() => {
-									dispatch(createNewPalette());
-									modalEditHandler();
+									dispatch(createNewPalette())
+									modalEditHandler()
 								}}
 							>
 								New
@@ -114,17 +101,9 @@ function Switcher() {
 				</DIV>
 			</div>
 			{/* every time modal window is opened it will render anew to reset all inputs */}
-			{swatchVisible ? (
-				<ModalEditWindow
-					status={modalIsOpen}
-					paletteIndex={activePalette}
-					edit={paletteData[activePalette]}
-					close={modalEditHandler}
-					isLastPalette={isLastPalette}
-				/>
-			) : null}
+			{swatchVisible ? <ModalEditWindow status={modalIsOpen} isLastPalette={isLastPalette} close={modalEditHandler} /> : null}
 		</div>
-	);
+	)
 }
 
-export default Switcher;
+export default Switcher
