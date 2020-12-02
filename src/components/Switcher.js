@@ -19,16 +19,6 @@ function Switcher() {
 		setIsOpen(!isOpen)
 	}
 
-	// DIV.defaultProps = {
-	// 	bg: paletteData[activePalette].colors[paletteData[activePalette].addresses.items.bg],
-	// }
-	// P.defaultProps = {
-	// 	color: paletteData[activePalette].colors[paletteData[activePalette].addresses.items.name],
-	// }
-	// BTN.defaultProps = {
-	// 	color: paletteData[activePalette].colors[paletteData[activePalette].addresses.items.btn],
-	// 	bg: paletteData[activePalette].colors[paletteData[activePalette].addresses.items.btnBg],
-	// }
 	DIV.defaultProps = {
 		bg: '#333',
 	}
@@ -63,10 +53,15 @@ function Switcher() {
 		}
 	}
 
+	function help() {
+		localStorage.removeItem('tutorial')
+		document.location.reload()
+	}
+
 	return (
 		<div>
 			<div className="switcher">
-				<DIV className={isOpen ? 'small opened' : 'small'} onClick={positionHandler}>
+				<DIV id="switch-button" className={isOpen ? 'small opened' : 'small'} onClick={positionHandler}>
 					<span className={isOpen ? '' : 'rotate'}>{opened}</span>
 				</DIV>
 				<DIV className={isOpen ? 'big opened' : 'big'}>
@@ -98,9 +93,11 @@ function Switcher() {
 							</button>
 						</div>
 					</div>
+					<button className="help-button" onClick={help}>
+						?
+					</button>
 				</DIV>
 			</div>
-			{/* every time modal window is opened it will render anew to reset all inputs */}
 			{swatchVisible ? <ModalEditWindow status={modalIsOpen} isLastPalette={isLastPalette} close={modalEditHandler} /> : null}
 		</div>
 	)

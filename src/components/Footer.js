@@ -8,12 +8,12 @@ import Instagram from './img/icons/Instagram.js'
 import Youtube from './img/icons/Youtube.js'
 import Twitter from './img/icons/Twitter.js'
 import { H5, P, LI, BTN_BORDER } from './_styled-components'
-import useTooltip from './utility/useTooltip/useTooltip'
+import useUndertool from 'undertool'
 import ColorToggle from './ColorToggle'
 
 function Footer() {
 	const { activePalette, paletteData } = useSelector(state => state)
-	const [tooltips, handler] = useTooltip({
+	const [tooltips, handler] = useUndertool({
 		children: {
 			bg: <ColorToggle section="footer" address="bg" description="Footer background" />,
 			title: <ColorToggle section="footer" address="titles" description="Column's title" />,
@@ -70,7 +70,7 @@ function Footer() {
 	}
 
 	return (
-		<div>
+		<>
 			<footer style={style.footer} onClick={handler} data-tooltip-content-id="bg">
 				<div className="wrapper">
 					<div className="footer-item">
@@ -134,7 +134,7 @@ function Footer() {
 				</div>
 			</footer>
 			{tooltips}
-		</div>
+		</>
 	)
 }
 

@@ -1,7 +1,6 @@
 footer {
 	margin-top: 3rem;
 	min-height: 100px;
-	/* background-color: #ddd; */
 	overflow: auto;
 }
 
@@ -20,12 +19,10 @@ footer .wrapper {
 .footer-item h5 {
 	text-align: center;
 	font-size: 0.9rem;
-	/* color: #555; */
 }
 
 .footer-item p {
 	font-size: 0.8rem;
-	/* color: #555; */
 }
 
 .footer-item ul li {
@@ -35,7 +32,6 @@ footer .wrapper {
 }
 
 .footer-item ul li:hover {
-	/* color: #0282fa; */
 	cursor: pointer;
 }
 
@@ -61,23 +57,48 @@ footer .wrapper {
 
 .social-img:hover {
 	cursor: pointer;
-	/* fill: #0282fa; */
 }
 
 .footer-btn {
-	/* background-color: #222; */
 	border-radius: 15px;
 	padding: 6px 18px;
 	font-size: 0.7rem;
 	font-weight: 700;
-	/* color: white; */
 	transition: 0.5s ease;
-	/* border: 1px solid #222; */
+	min-width: 95px;
 	width: 50%;
 }
 
 .footer-btn:hover {
 	cursor: pointer;
-	/* background-color: white; */
-	/* color: #222; */
+}
+
+@media (max-width: 1224px) {
+	.footer-item {
+		width: 165px;
+	}
+	.footer-item h5 {
+		font-size: 0.9rem;
+		min-height: 40px;
+		margin: 0;
+		padding: 1rem 0;
+	}
+}
+
+@media (max-width: 768px) {
+	.footer-item {
+		width: 140px;
+	}
+	.footer-item p {
+		font-size: 0.7rem;
+	}
+}
+
+@media (max-width: 680px) {
+	.social-img {
+		width: 20px;
+	}
+	.footer-item {
+		width: 120px;
+	}
 }

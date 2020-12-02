@@ -1,11 +1,10 @@
 header {
 	width: 100%;
-	/* background-color: #dddddd; */
 	height: 65px;
 }
 
 .wrapper {
-	width: 970px;
+	max-width: 970px;
 	margin: 0 auto;
 	height: 100%;
 }
@@ -25,19 +24,15 @@ header .wrapper {
 }
 
 .menu-button {
-	/* background-color: #999; */
 	border: none;
 	border-radius: 25px;
 	padding: 8px 22px;
 	font-size: 1rem;
-	/* color: white; */
 	transition: 0.5s ease;
 }
 
 .menu-button:hover {
-	/* color: black; */
 	cursor: pointer;
-	/* background-color: #0282fa; */
 }
 
 .menu-item,
@@ -47,7 +42,6 @@ li {
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
-	/* color: black; */
 }
 
 .menu-link,
@@ -61,6 +55,27 @@ li {
 
 .menu-item:hover,
 li:hover {
-	/* color: #0282fa; */
 	cursor: pointer;
+}
+
+@media (max-width: 1224px) {
+	.wrapper {
+		max-width: 720px;
+		padding: 0 1em;
+	}
+}
+
+@media (max-width: 768px) {
+	.wrapper {
+		max-width: 640px;
+	}
+}
+
+@media (max-width: 680px) {
+	.wrapper {
+		max-width: 540px;
+	}
+	.menu-wrapper {
+		width: 350px;
+	}
 }

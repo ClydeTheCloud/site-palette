@@ -4,12 +4,12 @@ import { LI, BTN } from './_styled-components'
 
 import Logo from './img/Logo'
 import './Header.css'
-import useTooltip from './utility/useTooltip/useTooltip'
+import useUndertool from 'undertool'
 import ColorToggle from './ColorToggle'
 
 function Header() {
 	const { activePalette, paletteData } = useSelector(state => state)
-	const [tooltips, handler] = useTooltip({
+	const [tooltips, handler] = useUndertool({
 		children: {
 			header: <ColorToggle section="header" address="bg" description="Header Background" />,
 			logo: <ColorToggle section="header" address="logo" description="Logo" />,
@@ -28,7 +28,7 @@ function Header() {
 				</div>
 			),
 		},
-		globalOptions: { single: true },
+		globalSingle: true,
 	})
 
 	LI.defaultProps = {

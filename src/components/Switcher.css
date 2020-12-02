@@ -95,13 +95,11 @@ span {
 .edit {
 	background-color: red;
 	color: white;
-	/* align-self: flex-start; */
 }
 
 .new {
 	background-color: blue;
 	color: white;
-	/* align-self: flex-end; */
 }
 
 .index {
@@ -113,6 +111,14 @@ span {
 	margin-bottom: 0;
 }
 
-/* .controls-wrapper {
-	min-height: 56px;
-} */
+.help-button {
+	border: none;
+	position: absolute;
+	left: 15px;
+	bottom: 15px;
+	width: 25px;
+	height: 25px;
+	background-color: white;
+	color: #333;
+	border-radius: 25px;
+}

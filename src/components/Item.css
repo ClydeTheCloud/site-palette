@@ -5,7 +5,6 @@
 	border-radius: 10px;
 	margin-top: 3rem;
 	text-align: center;
-	/* background-color: #ddd; */
 	padding-bottom: 80px;
 }
 
@@ -20,21 +19,17 @@
 .item button {
 	position: absolute;
 	bottom: 30px;
-	/* background-color: #99dddd; */
 	border: none;
 	border-radius: 25px;
 	padding: 8px 22px;
 	font-size: 1rem;
-	/* color: black; */
 	transition: 0.5s ease;
 	left: 50%;
 	transform: translateX(-50%);
 }
 
 .item button:hover {
-	/* color: white; */
 	cursor: pointer;
-	/* background-color: #0282fa; */
 }
 
 .item p {

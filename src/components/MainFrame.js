@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux'
 import Item from './Item'
 import './MainFrame.css'
 import { H1, H2, H3, P, BTN_BORDER } from './_styled-components'
-import useTooltip from './utility/useTooltip/useTooltip'
+import useUndertool from 'undertool'
 import ColorToggle from './ColorToggle'
 
 function MainFrame() {
 	const { activePalette, paletteData } = useSelector(state => state)
-	const [tooltips, handler] = useTooltip({
+	const [tooltips, handler] = useUndertool({
 		children: {
 			title: <ColorToggle section="main" address="title" description="Title text" />,
 			subTitle: <ColorToggle section="main" address="subTitle" description="Sub-Title text" />,
@@ -36,7 +36,6 @@ function MainFrame() {
 				</div>
 			),
 		},
-		// globalOptions: { single: true },
 	})
 
 	const [data, setData] = useState([])
@@ -86,34 +85,37 @@ function MainFrame() {
 	const loadingMessage = <H2 className="loading-item">Loading, please wait...</H2>
 
 	return (
-		<div className="body-click-catch" onClick={handler} data-tooltip-content-id="body" data-tooltip-config="auto pop3 magnet:on">
-			<div className="wrapper main">
-				<div className="main-text">
-					<H1 onClick={handler} data-tooltip-content-id="title" data-tooltip-config="bottom pop3">
-						Some title text go here.
-					</H1>
-					<H3 onClick={handler} data-tooltip-content-id="subTitle" data-tooltip-config="right pop3">
-						Some more text to explain something very important. You need to hear this.
-					</H3>
-					<P onClick={handler} data-tooltip-content-id="text" data-tooltip-config="bottom pop3">
-						This is where we go in detail. Take a closer look. We sure you'll like it. A lot. But don't take my word for
-						it, go on and try it yourself! I'll wait for you here, don't worry, i'm not going anywhere. Take your time.
-					</P>
-					<BTN_BORDER
-						className="main-btn"
-						onClick={handler}
-						data-tooltip-content-id="button"
-						data-tooltip-config="left pop3"
-					>
-						TRY IT OUT NOW
-					</BTN_BORDER>
-				</div>
-				<div className="main-background-image"></div>
-				<div className="wrapper wrapper-items">
-					<H2 onClick={handler} data-tooltip-content-id="title">
-						Here are some items from unsplash API:
-					</H2>
-					<div className="items">{isLoading ? loadingMessage : items}</div>
+		<div>
+			<div onClick={handler} data-tooltip-content-id="body" data-tooltip-config="bottom pop3 magnet:on">
+				<div className="wrapper main">
+					<div className="main-text">
+						<H1 onClick={handler} data-tooltip-content-id="title" data-tooltip-config="bottom pop3">
+							Some title text go here.
+						</H1>
+						<H3 onClick={handler} data-tooltip-content-id="subTitle" data-tooltip-config="bottom pop3">
+							Some more text to explain something very important. You need to hear this.
+						</H3>
+						<P onClick={handler} data-tooltip-content-id="text" data-tooltip-config="bottom pop3">
+							This is where we go in detail. Take a closer look. We sure you'll like it. A lot. But don't take my word
+							for it, go on and try it yourself! I'll wait for you here, don't worry, i'm not going anywhere. Take your
+							time.
+						</P>
+						<BTN_BORDER
+							className="main-btn"
+							onClick={handler}
+							data-tooltip-content-id="button"
+							data-tooltip-config="left pop3"
+						>
+							TRY IT OUT NOW
+						</BTN_BORDER>
+					</div>
+					<div className="main-background-image" />
+					<div className="wrapper wrapper-items">
+						<H2 onClick={handler} data-tooltip-content-id="title">
+							Here are some items from unsplash API:
+						</H2>
+						<div className="items">{isLoading ? loadingMessage : items}</div>
+					</div>
 				</div>
 			</div>
 			{tooltips}
