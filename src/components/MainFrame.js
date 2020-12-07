@@ -86,7 +86,7 @@ function MainFrame() {
 
 	return (
 		<div>
-			<div onClick={handler} data-tooltip-content-id="body" data-tooltip-config="bottom pop3 magnet:on">
+			<div onClick={handler} data-tooltip-content-id="body" data-tooltip-config="bottom pop3 magnet:on hideable:off">
 				<div className="wrapper main">
 					<div className="main-text">
 						<H1 onClick={handler} data-tooltip-content-id="title" data-tooltip-config="bottom pop3">

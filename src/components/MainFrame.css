@@ -9,11 +9,6 @@
 	grid-gap: 2vh;
 }
 
-.tooltip-helper-class[data-popper-reference-hidden] {
-	visibility: visible;
-	pointer-events: all;
-}
-
 .main-background-image {
 	grid-area: img;
 	background-image: url(./img/illustration.svg);
