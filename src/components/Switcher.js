@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import useUndertool from 'undertool'
+
 import './Switcher.css'
 import PaletteItem from './PaletteItem'
 import ModalEditWindow from './ModalEditWindow'
@@ -10,6 +12,7 @@ function Switcher() {
 	const { activePalette, paletteData } = useSelector(state => state)
 	const dispatch = useDispatch()
 
+	const [, , closeAll] = useUndertool()
 	const opened = '>'
 
 	const [isOpen, setIsOpen] = useState(false)
@@ -34,6 +37,7 @@ function Switcher() {
 	const [modalIsOpen, setModalIsOpen] = useState(false)
 
 	function modalEditHandler() {
+		closeAll(true)
 		setModalIsOpen(!modalIsOpen)
 		setSwatchVisible(!swatchVisible)
 	}
