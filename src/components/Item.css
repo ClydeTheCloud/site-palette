@@ -1,44 +1,102 @@
 .item {
-	position: relative;
-	width: 250px;
-	padding: 20px;
-	border-radius: 10px;
-	margin-top: 3rem;
-	text-align: center;
-	padding-bottom: 80px;
+    position: relative;
+    width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 3rem;
+    text-align: center;
+    padding-bottom: 80px;
 }
 
 .item img {
-	border-radius: 5px;
+    border-radius: 5px;
 }
 
 .img-container {
-	min-height: 140px;
+    min-height: 140px;
 }
 
 .item button {
-	position: absolute;
-	bottom: 30px;
-	border: none;
-	border-radius: 25px;
-	padding: 8px 22px;
-	font-size: 1rem;
-	transition: 0.5s ease;
-	left: 50%;
-	transform: translateX(-50%);
+    position: absolute;
+    bottom: 30px;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 22px;
+    font-size: 1rem;
+    transition: 0.5s ease;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .item button:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .item p {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5rem;
 }
 
 .item h3 {
-	min-height: 2rem;
+    min-height: 2rem;
+}
+
+@media (max-width: 680px) {
+    .item {
+        width: 200px;
+        margin-top: 1em;
+        padding: 16px 16px 80px;
+    }
+    .item p {
+        min-height: 3em;
+    }
+}
+
+@media (max-width: 540px) {
+    .item {
+        padding: 20px;
+        width: 100%;
+        display: grid;
+        gap: 5px;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            'img info'
+            'button button';
+    }
+
+    .img-container {
+        grid-area: img;
+    }
+
+    .item-info {
+        grid-area: info;
+    }
+
+    .item-button-wrapper {
+        padding-top: 20px;
+        grid-area: button;
+    }
+
+    .item button {
+        position: initial;
+        left: initial;
+        bottom: initial;
+        transform: initial;
+    }
+}
+
+@media (max-width: 450px) {
+    .item {
+        width: 100%;
+        max-width: 250px;
+        grid-template-rows: auto auto 1fr;
+        grid-template-columns: auto;
+        grid-template-areas:
+            'img'
+            'info'
+            'button';
+    }
 }

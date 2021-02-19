@@ -2,12 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap');
 
 body {
-	margin: 0;
+    margin: 0;
 }
 
 h1,
 p,
 div,
 button {
-	font-family: 'Jost', sans-serif;
+    font-family: 'Jost', sans-serif;
 }

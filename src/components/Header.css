@@ -1,81 +1,92 @@
 header {
-	width: 100%;
-	height: 65px;
+    width: 100%;
+    height: 65px;
 }
 
 .wrapper {
-	max-width: 970px;
-	margin: 0 auto;
-	height: 100%;
+    max-width: 970px;
+    margin: 0 auto;
+    height: 100%;
 }
 
 header .wrapper {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .menu-wrapper {
-	width: 450px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 100%;
+    width: 450px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
 }
 
 .menu-button {
-	border: none;
-	border-radius: 25px;
-	padding: 8px 22px;
-	font-size: 1rem;
-	transition: 0.5s ease;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 22px;
+    font-size: 1rem;
+    transition: 0.5s ease;
 }
 
 .menu-button:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .menu-item,
 li {
-	font-size: 1rem;
-	transition: 0.5s ease;
-	width: 100%;
-	height: 100%;
-	text-decoration: none;
+    font-size: 1rem;
+    transition: 0.5s ease;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
 }
 
 .menu-link,
 .menu-item:last-child {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .menu-item:hover,
 li:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 @media (max-width: 1224px) {
-	.wrapper {
-		max-width: 720px;
-		padding: 0 1em;
-	}
+    .wrapper {
+        max-width: 720px;
+        padding: 0 1em;
+    }
 }
 
 @media (max-width: 768px) {
-	.wrapper {
-		max-width: 640px;
-	}
+    .wrapper {
+        max-width: 640px;
+    }
 }
 
 @media (max-width: 680px) {
-	.wrapper {
-		max-width: 540px;
-	}
-	.menu-wrapper {
-		width: 350px;
-	}
+    .wrapper {
+        max-width: 540px;
+    }
+    .menu-wrapper {
+        width: 350px;
+    }
+}
+
+@media (max-width: 540px) {
+    .menu-item:nth-last-child(2),
+    .menu-item:nth-last-child(3) {
+        display: none;
+    }
+
+    .menu-button {
+        padding: 6px 16px;
+    }
 }

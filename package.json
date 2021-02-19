@@ -18,7 +18,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+	"buildAndCopy": "rm -rf build && npm run build && cd ../portfolio/site-palette/ && rm -rf * && cd ../../site-palette/build && cp -r * ../../portfolio/site-palette/",
+	"test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
