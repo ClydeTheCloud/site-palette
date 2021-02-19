@@ -10,30 +10,30 @@ import Help from './components/help'
 import { init } from './logic/actions'
 
 function App() {
-	const tutorialFinished = localStorage.getItem('tutorial')
-	const [scroll, setScroll] = useState(Boolean(tutorialFinished))
-	const dispatch = useDispatch()
-	const state = useSelector(state => state)
+    const tutorialFinished = localStorage.getItem('tutorial')
+    const [scroll, setScroll] = useState(Boolean(tutorialFinished))
+    const dispatch = useDispatch()
+    const state = useSelector(state => state)
 
-	useEffect(() => {
-		dispatch(init())
-	}, [dispatch])
+    useEffect(() => {
+        dispatch(init())
+    }, [dispatch])
 
-	useEffect(() => {
-		localStorage.setItem('palette', JSON.stringify(state))
-	})
+    useEffect(() => {
+        localStorage.setItem('palette', JSON.stringify(state))
+    })
 
-	return (
-		<div className={scroll ? '' : 'no-scroll'}>
-			<Switcher />
-			{scroll || tutorialFinished ? null : <Help setScroll={setScroll} />}
-			<div className="app">
-				<Header />
-				<MainFrame />
-				<Footer />
-			</div>
-		</div>
-	)
+    return (
+        <div className={scroll ? '' : 'no-scroll'}>
+            <Switcher />
+            {scroll || tutorialFinished ? null : <Help setScroll={setScroll} />}
+            <div className="app">
+                <Header />
+                <MainFrame />
+                <Footer />
+            </div>
+        </div>
+    )
 }
 
 export default App
