@@ -135,7 +135,7 @@ function MainFrame() {
                             className="main-btn"
                             onClick={handler}
                             data-tooltip-content-id="button"
-                            data-tooltip-config="left pop3"
+                            data-tooltip-config="auto pop3"
                         >
                             TRY IT OUT NOW
                         </BTN_BORDER>
